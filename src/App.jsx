@@ -9,10 +9,12 @@ import Cart from "./pages/Cart";
 import Service from "./pages/Service";
 import { useEffect, useState } from "react";
 import axios from "axios";
+// import { useUser } from "@clerk/clerk-react";
 
 function App() {
   let [location, setLocation] = useState();
   let [dropDown, setDropdown] = useState(false);
+  // let { isSignedIn } = useUser();
   let getLocation = async () => {
     navigator.geolocation.getCurrentPosition(async (position) => {
       const { longitude, latitude } = position.coords;
@@ -30,9 +32,11 @@ function App() {
       }
     });
   };
-  useEffect(() => {
-    getLocation();
-  }, []);
+  // useEffect(() => {
+  //   if (isSignedIn) {
+  //     getLocation();
+  //   }
+  // }, [isSignedIn]);
   return (
     <BrowserRouter>
       <Navbar

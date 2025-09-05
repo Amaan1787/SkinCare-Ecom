@@ -10,11 +10,13 @@ import {
   UserButton,
 } from "@clerk/clerk-react";
 import { useState } from "react";
+import { useUser } from "@clerk/clerk-react";
 
 const Navbar = ({ location, getLocation, dropDown, setDropdown }) => {
   let toggleDropdown = () => {
     setDropdown(!dropDown);
   };
+  let { isSignedIn } = useUser();
 
   return (
     <div className="bg-white p-3 shadow-2xl">
@@ -53,7 +55,7 @@ const Navbar = ({ location, getLocation, dropDown, setDropdown }) => {
               <div className="flex justify-end mt-4">
                 <button
                   className="text-[14px] bg-red-600 py-1 px-2 rounded-md text-white cursor-pointer"
-                  onClick={getLocation}
+                  onClick={()=>isSignedIn ? getLocation() : null}
                 >
                   Detect my location
                 </button>
