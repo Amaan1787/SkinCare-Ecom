@@ -17,6 +17,15 @@ const Navbar = ({ location, getLocation, dropDown, setDropdown }) => {
     setDropdown(!dropDown);
   };
   let { isSignedIn } = useUser();
+  let locationDetect = () => {
+    if (!isSignedIn) return;
+    let allow = window.confirm("Can I detect your location?");
+    if (!allow) {
+      return;
+    } else {
+      getLocation();
+    }
+  };
 
   return (
     <div className="bg-white p-3 shadow-2xl">
@@ -42,7 +51,7 @@ const Navbar = ({ location, getLocation, dropDown, setDropdown }) => {
             <FaCaretDown onClick={toggleDropdown} />
           </div>
           {dropDown ? (
-            <div className="w-52 h-max shadow-2xl z-10 fixed top-10 left-66 border-2 p-2 bg-white border-gray-200 rounded-md">
+            <div className="w-52 h-max shadow-2xl z-10 fixed top-12 left-115 border-2 p-2 bg-white border-gray-200 rounded-md">
               <h1 className="flex justify-between text-[16px] items-center">
                 Change Location
                 <span>
@@ -55,7 +64,7 @@ const Navbar = ({ location, getLocation, dropDown, setDropdown }) => {
               <div className="flex justify-end mt-4">
                 <button
                   className="text-[14px] bg-red-600 py-1 px-2 rounded-md text-white cursor-pointer"
-                  onClick={()=>isSignedIn ? getLocation() : null}
+                  onClick={locationDetect}//() => (isSignedIn ? getLocation() : null)
                 >
                   Detect my location
                 </button>

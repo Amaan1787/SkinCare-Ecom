@@ -6,7 +6,7 @@ import About from "./pages/About";
 import Contact from "./pages/Contact";
 import Product from "./pages/Product";
 import Cart from "./pages/Cart";
-import Service from "./pages/Service";
+
 import { useEffect, useState } from "react";
 import axios from "axios";
 // import { useUser } from "@clerk/clerk-react";
@@ -51,7 +51,6 @@ function App() {
         <Route path="/about" element={<About />} />
         <Route path="/contact" element={<Contact />} />
         <Route path="/cart" element={<Cart />} />
-        <Route path="/service" element={<Service />} />
       </Routes>
       <Footer />
     </BrowserRouter>
