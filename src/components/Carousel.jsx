@@ -4,6 +4,11 @@ import { useContext } from "react";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
+import Category from "./Category";
+import {
+  IoIosArrowDropleftCircle,
+  IoIosArrowDroprightCircle,
+} from "react-icons/io";
 
 const Carousel = () => {
   const { data, fetchAllProducts } = useContext(Context);
@@ -13,6 +18,45 @@ const Carousel = () => {
     fetchAllProducts();
   }, []);
 
+  const SampleNextArrow = (props) => {
+    const { className, style, onClick } = props;
+    return (
+      <div
+        onClick={onClick}
+        className={`arrow ${className}`}
+        style={{
+          zIndex: 10,
+          position: "absolute",
+          left: "50%",
+          top: "calc(100% - 80px)",
+          transform: "translateX(90%)",
+          cursor: "pointer",
+        }}
+      >
+        <IoIosArrowDroprightCircle className="arrow " />
+      </div>
+    );
+  };
+  const SamplePrevArrow = (props) => {
+    const { className, style, onClick } = props;
+    return (
+      <div
+        onClick={onClick}
+        className={`arrow ${className}`}
+        style={{
+          zIndex: 10,
+          position: "absolute",
+          left: "50%",
+          top: "calc(100% - 80px)",
+          transform: "translateX(-90px)",
+          cursor: "pointer",
+        }}
+      >
+        <IoIosArrowDropleftCircle className="arrow " />
+      </div>
+    );
+  };
+
   var settings = {
     dots: false,
     autoplay: true,
@@ -21,19 +65,22 @@ const Carousel = () => {
     speed: 500,
     slidesToShow: 1,
     slidesToScroll: 1,
-    arrow:false,
-    centerMode:false,
-    variableWidth:false
+    arrows: true,
+    centerMode: false,
+    variableWidth: false,
+    nextArrow: <SampleNextArrow to="next" />,
+    prevArrow: <SamplePrevArrow to="previous" />,
   };
 
   return (
     <div className="w-full overflow-hidden">
       <Slider {...settings}>
-        {data?.slice(0, 7)?.map((val, ind) => {
+        {data?.slice(90, 99)?.map((val, ind) => {
           return (
             <div
               key={ind}
               className="bg-gradient-to-br from-gray-100 via-white to-gray-200 relative overflow-hidden"
+              style={{ position: "relative" }}
             >
               {/* Decorative background elements */}
               <div className="absolute inset-0 opacity-5">
@@ -133,6 +180,7 @@ const Carousel = () => {
           );
         })}
       </Slider>
+      <Category />
     </div>
   );
 };
